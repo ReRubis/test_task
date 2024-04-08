@@ -1,0 +1,25 @@
+[project]
+name = "jh-interview"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Vadim Suharnikov", email = "vsuharnikov@gmail.com"},
+]
+dependencies = [
+    "numpy>=1.26.4",
+    "ipython>=8.23.0",
+    "ipykernel>=6.29.4",
+    "pandas>=2.2.1",
+    "yarl>=1.9.4",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
