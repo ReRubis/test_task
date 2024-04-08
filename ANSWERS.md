@@ -65,7 +65,7 @@ But I am not sure if it will be useful, it depends on the usage, which I am not 
 Considering my table structure, the query would require a join. 
 
 ```sql
-SELECT * FROM transactions JOIN propertys ON transactions.property_id = propertys.unique_id WHERE propertys.postcode LIKE '%EC1A%' AND transactions.date_of_transfer BETWEEN '2018-04-01' AND '2019-12-31';
+SELECT transaction_id, date_of_transfer, postcode, unique_id FROM transactions JOIN propertys ON transactions.property_id = propertys.unique_id WHERE propertys.postcode LIKE '%EC1A%' AND transactions.date_of_transfer BETWEEN '2018-04-01' AND '2019-12-31';
 ```
 
 I also took advice of using only 2019-2020 data, so my results most likely include less rows than expected. 
