@@ -78,6 +78,33 @@ transaction_ids refer to those. Test with ST10 4BS. Were there 2 transaction in
 - Given a transaction_id, return which property it refers to. Test with {7C2D0701-
 0253-4963-E053-6B04A8C07B97}. Does it return a property in Cornwall?
 
+There are different ways of how to work with models. 
+I prefer to use separate service classes to handle models instead of adding methods to the model classes.
+Segregation of concerns is important and it makes it easier to work with the project. 
+Also improves the testability. 
+
+This class uses composition principle and has a dependency on the repositories.
+The repositories are responsible for the database operations.
+My repositories use sqlalchemy to interact with the database.
+One can substitute the repositories with any other implementation.
+
+-In 'ST10 4BS' 2019-2020 I've found 3 transactions. Yes, two occured in 2019, one in 2020. 
+```sh
+pytest tests/test_presence.py -k test_get_transactions_by_postcode
+```
+
+
+-I took advice of only using 2019-2020 data, so there was no {7C2D0701-0253-4963-E053-6B04A8C07B97}.
+Looking at the complete file, that such transaction occured on "2018-07-19 00:00". And yes, it refers to a property in Cornwall.
+I made a test for similar use cases in test/test_presence.py 
+```sh
+pytest tests/test_presence.py -k test_return_property_by_transaction
+```
+
+-There were 2 transactions in 2019.
+
+
+
 * Which postcodes have seen the highest increase in transactions during the last 5 years? No
 need to do the analysis at the full postcode level; the first part is sufficient. Thus instead of
 e.g. SE13 5HA, consider only SE13.

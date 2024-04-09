@@ -64,9 +64,23 @@ class BaseRepository():
 class TransactionRepository(BaseRepository):
     __model__ = Transaction
 
+    def get_transaction(self, transaction_id: str) -> Transaction:
+        """Returns the transaction by transaction_id."""
+        transaction = self.query.filter_by(
+            transaction_id=transaction_id).first()
+        return transaction
+
 
 class PropertyRepository(BaseRepository):
     __model__ = Property
+
+    def get_property(self, property_id) -> Property:
+        """Returns the property object."""
+        return self.query.filter_by(unique_id=property_id).first()
+
+    def get_properties_by_postcode(self, postcode: str) -> list[Property]:
+        """Returns a list of properties by postcode."""
+        return self.query.filter_by(postcode=postcode).all()
 
 
 class PostcodeRepository(BaseRepository):

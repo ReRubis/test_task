@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from hashlib import md5
 
 
 @dataclass(slots=True)
@@ -11,17 +12,15 @@ class TransactionModel:
 
 @dataclass(slots=True)
 class PropertyModel:
-    id: str
+    unique_id: str
     """Unique identifier for the property.
 
     The 'PAON' (Primary Addressable Object Name) and 'SAON' (Secondary Addressable Object Name)
     are typically stable identifiers for a property, as they represent the address of the property.
     However, they might not be unique across different streets or postcodes.
-    So, we use the combination of 'PAON', 'SAON', and 'Street' to create a unique identifier for the property.
+    So, we use the combination of 'PAON', 'SAON', and 'postcode' to create a unique identifier for the property.
     """
 
-    property_type: str
-    old_new: str
     postcode: str
     paon: str | None
     saon: str | None
@@ -30,13 +29,14 @@ class PropertyModel:
     town_city: str
     district: str
     country: str
-    transactions: list[TransactionModel] = field(default_factory=list)
+    transactions: list[str] = field(default_factory=list)
 
     def __post_init__(self):
-        if not self.id:
-            self.id = f'{self.paon}-{self.saon}-{self.street}'
+        if not self.unique_id:
+            unique_id = f'{self.paon} {self.saon} {self.postcode}'
+            self.unique_id = md5(unique_id.encode()).hexdigest()
 
-    def add_transaction(self, transaction: TransactionModel):
+    def add_transaction(self, transaction: str):
         self.transactions.append(transaction)
 
 

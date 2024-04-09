@@ -81,11 +81,8 @@ def test_property_id(transactions_df: pd.DataFrame):
         )
 
         new_property = PropertyModel(
-            id=property_id,
-            property_type=row['property_type'] if pd.notna(
-                row['property_type']) else None,
+            unique_id=property_id,
             postcode=row['postcode'] if pd.notna(row['postcode']) else None,
-            old_new=row['old_new'] if pd.notna(row['old_new']) else None,
             paon=row['paon'] if pd.notna(row['paon']) else None,
             saon=row['saon'] if pd.notna(row['saon']) else None,
             street=row['street'] if pd.notna(row['street']) else None,

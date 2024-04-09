@@ -27,7 +27,7 @@ class Property(Base):
     town_city = Column(String, unique=False, nullable=True)
     district = Column(String, unique=False, nullable=True)
     country = Column(String, unique=False, nullable=True)
-    transactions = Column(String, unique=False, nullable=True)
+    transactions = Column(JSON, unique=False, nullable=True)
 
 
 class Transaction(Base):
