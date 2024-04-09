@@ -34,6 +34,7 @@ class Transaction(Base):
     transaction_id = Column(String(255), primary_key=True)
     property_id = Column(String, unique=False, nullable=True)
     price = Column(String, unique=False, nullable=True)
+    postcode = Column(String, unique=False, nullable=True)
     date_of_transfer = Column(String, unique=False, nullable=True)
 
 

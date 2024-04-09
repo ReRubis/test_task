@@ -3,6 +3,7 @@ from jh_interview.database.schemas import Transaction, Property, Postcode
 from sqlalchemy.inspection import inspect
 from sqlalchemy.orm.query import Query
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import func, text
 
 
 class BaseRepository():
@@ -69,6 +70,43 @@ class TransactionRepository(BaseRepository):
         transaction = self.query.filter_by(
             transaction_id=transaction_id).first()
         return transaction
+
+    def get_unique_postcodes(self) -> list[Transaction]:
+        """Returns a list of unique postcodes."""
+        return self.query.distinct(Transaction.postcode).all()
+
+    def get_transactions_count_by_postcode_and_year(
+        self,
+    ) -> dict[str, dict[str, int]]:
+        """Returns a count transaction by postcode and year."""
+        result = self.session.execute(text("""
+            SELECT
+                CASE
+                    WHEN CHARINDEX(' ', postcode) > 0 THEN LEFT(postcode, CHARINDEX(' ', postcode) - 1)
+                    ELSE postcode
+                END AS postcode_part1,
+                LEFT(date_of_transfer, 4) AS year,
+                COUNT(transaction_id) AS total_transactions
+            FROM transactions
+            GROUP BY
+                CASE
+                    WHEN CHARINDEX(' ', postcode) > 0 THEN LEFT(postcode, CHARINDEX(' ', postcode) - 1)
+                    ELSE postcode
+                END,
+                LEFT(date_of_transfer, 4);
+        """))
+
+        transactions_by_year = {}
+        for row in result:
+            year = row[1]
+            if year not in transactions_by_year:
+                transactions_by_year[year] = {}
+
+            transactions_by_year[year][
+                row[0]
+            ] = row[2]
+
+        return transactions_by_year
 
 
 class PropertyRepository(BaseRepository):

@@ -6,6 +6,7 @@ from hashlib import md5
 class TransactionModel:
     transaction_id: str
     property_id: str
+    postcode: str
     price: float
     date_of_transfer: str
 

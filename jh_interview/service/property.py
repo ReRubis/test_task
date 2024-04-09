@@ -70,6 +70,7 @@ class PropertyService:
         transaction = TransactionModel(
             transaction_id=transaction.transaction_id,
             property_id=transaction.property_id,
+            postcode=transaction.postcode,
             price=transaction.price,
             date_of_transfer=transaction.date_of_transfer,
         )
@@ -106,3 +107,46 @@ class PropertyService:
         )
 
         return property
+
+    def return_highest_increase_postcodes(
+        self,
+        years: list[str],
+    ):
+        """Returns a list of postcodes with the highest increase in transactions."""
+        postcodes = self._get_postcodes_transactions_count()
+
+        postcodes_difference = {}
+        previous_counts = {}
+
+        for year in sorted(years):
+            if year not in postcodes:
+                continue
+
+            for postcode, count in postcodes[year].items():
+                if postcode not in postcodes_difference:
+                    postcodes_difference[postcode] = 0
+
+                if postcode in previous_counts:
+                    increase = count - previous_counts[postcode]
+                    postcodes_difference[postcode] += increase
+
+                previous_counts[postcode] = count
+
+        postcodes_difference = dict(
+            sorted(postcodes_difference.items(),
+                   key=lambda item: item[1], reverse=True)[:5]
+        )
+
+        return postcodes_difference
+
+    def _get_postcodes_transactions_count(
+        self,
+    ) -> dict[str, dict[str, int]]:
+        """Returns a dictionary of postcodes with the count of transactions.
+
+        {
+            '2019': {<postcode>: <count>, ...},
+        }
+        """
+        transactions_count = self.transaction_repo.get_transactions_count_by_postcode_and_year()
+        return transactions_count
