@@ -128,7 +128,8 @@ Yeah, I combined the dataset of transactions and the dataset of postcodes coordi
 On column postcode - postcode_2.
 I am not that aware of postcode structure in UK, but it seems like the second way of writing the postcode
 was the right one to me. 
-The solution is only in Jupyter. In analyze_migration.ipynb file.
+
+[Solution](https://github.com/ReRubis/tamarix_test/blob/main/jh_interview/analyze_migration.ipynb)
 
 The code should be run good for larger datasets, not only 2019, 2020. 
 
@@ -146,6 +147,8 @@ so try to use the centre of all of the postcodes within it. The distance between
 and b, with coordinates (x1, y1) and (x0, y0) is 𝑑 = ඥ(𝑥ଵ − 𝑥଴
 )ଶ + (𝑦ଵ − 𝑦଴
 )ଶ
+
+[Solution](https://github.com/ReRubis/tamarix_test/blob/main/jh_interview/analyze_distance.ipynb)
 
 So I used the same dataset of united transactions and postcodes coordinates. 
 I calculated the centre of EC1A, and then calculated the distance of each postcode from EC1A.
@@ -171,3 +174,31 @@ Tried using higher polynomials, but still wasn't satisfied. :\
 synchronized. Assume that all data points are normalized (an average price in Aug 2014 can
 be matched to an Aug 2014 entry in the CPI dataset). Also, just use United Kingdom as a region
 from the first file. 
+
+
+[Solution](https://github.com/ReRubis/tamarix_test/blob/main/jh_interview/analyze_correlation.ipynb)
+
+I used average house prices in United kingdom, removed all the fields leaving only date and price.
+And did so with the CPI dataset. 
+
+For the CPI, I only left the CPI values per month per CDID.
+
+I then merged the two datasets on the date field.
+
+And used .corr()['Average_Price'] 
+
+Here are 5 CDID with highest and lowest correlations to average house prices. 
+
+| Variable       | Correlation |
+| -------------- | ----------- |
+| FV2O           | 1.000000    |
+| CHOO           | 0.997081    |
+| CHBF           | 0.988404    |
+| DOBR           | 0.985995    |
+| DHYR           | 0.985156    |
+|                |             |
+| FV2K           | -1.000000   |
+| JFDC           | -0.967506   |
+| J9DM           | -0.964134   |
+| D7FF           | -0.958889   |
+| L54S           | -0.958889   |
