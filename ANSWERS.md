@@ -21,7 +21,7 @@ But for now it's not.
 I decided to keep the important and unique to the property information in the Property table.
 While leaving the information about the transactions in the Transaction table.
 
-![GitHub Link](https://github.com/ReRubis/tamarix_test/blob/main/jh_interview/database/schemas.py)
+[Schemas Code](https://github.com/ReRubis/tamarix_test/blob/main/jh_interview/database/schemas.py)
 
 
 
