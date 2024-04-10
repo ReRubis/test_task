@@ -124,6 +124,18 @@ Where is the ‘centre of gravity’ in terms of value moving to? For now, consi
 of gravity’ is a weighted average function, so for each year determine the weighted average
 of the coordinates based on number of transactions, or value.
 
+Yeah, I combined the dataset of transactions and the dataset of postcodes coordinates.
+On column postcode - postcode_1. Although I am not sure how postcode 2,3 should be used. I ignored them. 
+The solution is only in Jupyter. In analyze_migration.ipynb file.
+
+The code should be run good for larger datasets, not only 2019, 2020. 
+
+| year | centre_of_gravity_transactions | centre_of_gravity_value |
+|------|--------------------------------|-------------------------|
+| 2019 | (52.475182, -1.410200)         | (52.475182, -1.410200)  |
+| 2020 | (52.470821, -1.397611)         | (52.470821, -1.397611)  |
+
+
 > Assume that EC1A is the centre of London. Can you plot the average transaction price of a
 postcode as a function of distance from EC1A? There are numerous postcodes within EC1A,
 so try to use the centre of all of the postcodes within it. The distance between two points a,
