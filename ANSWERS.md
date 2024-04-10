@@ -125,15 +125,19 @@ of gravity’ is a weighted average function, so for each year determine the wei
 of the coordinates based on number of transactions, or value.
 
 Yeah, I combined the dataset of transactions and the dataset of postcodes coordinates.
-On column postcode - postcode_1. Although I am not sure how postcode 2,3 should be used. I ignored them. 
+On column postcode - postcode_2.
+I am not that aware of postcode structure in UK, but it seems like the second way of writing the postcode
+was the right one to me. 
 The solution is only in Jupyter. In analyze_migration.ipynb file.
 
 The code should be run good for larger datasets, not only 2019, 2020. 
 
 | year | centre_of_gravity_transactions | centre_of_gravity_value |
 |------|--------------------------------|-------------------------|
-| 2019 | (52.475182, -1.410200)         | (52.475182, -1.410200)  |
-| 2020 | (52.470821, -1.397611)         | (52.470821, -1.397611)  |
+| 2019 | (52.257384, -1.352146)         | (52.257384, -1.352146)  |
+| 2020 | (52.250982, -1.321349)         | (52.250982, -1.321349)  |
+
+
 
 
 > Assume that EC1A is the centre of London. Can you plot the average transaction price of a
@@ -142,6 +146,25 @@ so try to use the centre of all of the postcodes within it. The distance between
 and b, with coordinates (x1, y1) and (x0, y0) is 𝑑 = ඥ(𝑥ଵ − 𝑥଴
 )ଶ + (𝑦ଵ − 𝑦଴
 )ଶ
+
+So I used the same dataset of united transactions and postcodes coordinates. 
+I calculated the centre of EC1A, and then calculated the distance of each postcode from EC1A.
+I then rounded the distance and deleted the duplicates. 
+
+Ploted the graph and then spend quite a while trying to find a good approximating function.
+
+I wasn't satisfied with the least squeares method of higher degree polynomials, so I decided to use the linear function as a result. 
+
+Looking at the graph, it looks like it might be a good approximation on the long distance from EC1A, but closer to EC1A it's not that good. 
+
+
+![IMAGE OF GRAPH](https://media.discordapp.net/attachments/1097141968682893484/1227639231539839099/image.png?ex=66292321&is=6616ae21&hm=56685de300949f7115566fe902a9b4f96d3290b48a3058d8e86b2e59013a82fa&=&format=webp&quality=lossless)
+
+
+Exponential function was also tried, but it was not that good on the long distance. 
+![IMAGE OF GRAPH](https://media.discordapp.net/attachments/1097141968682893484/1227641761501806623/image.png?ex=6629257c&is=6616b07c&hm=f3f999b43b63f0644b7fb12db425c0a85a7e7b24cd51405b7dc95d78c0ce6bc2&=&format=webp&quality=lossless)
+
+Tried using higher polynomials, but still wasn't satisfied. :\ 
 
 > Can you find any correlation between the average house prices (url #4), and a CPI indicator
 (url #5)? Do not be concerned about the lag in the CPI and the house prices not being
