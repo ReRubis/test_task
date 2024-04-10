@@ -1,5 +1,6 @@
 Questions.
-> There is no unique identifier for a property in the data. How would you approach this to come
+---
+> 1. There is no unique identifier for a property in the data. How would you approach this to come
 up with a column that can be used as a unique id for each property? Would you combine any 
 columns for instance? Can you test your method that it returns unique values? Are there any
 issues?
@@ -9,8 +10,8 @@ Generally, the combination of paon, saon and postcode should be unique for each 
 There are some properties that have the same paon, saon and postcode, but they are different properties, I decided to ignore such cases. 
 I have tested different combinations of transaction values to identify the uniqueness of property, and I concluded that this one is the best for my use case. 
 
-
-> Once you have defined a property unique id (unfortunately this doesn’t exist in the data so it
+---
+> 2. Once you have defined a property unique id (unfortunately this doesn’t exist in the data so it
 needs to be defined by you), how would you store the data in your SQL database? What table
 structure would you use?
 
@@ -24,8 +25,8 @@ While leaving the information about the transactions in the Transaction table.
 [Schemas Code](https://github.com/ReRubis/tamarix_test/blob/main/jh_interview/database/schemas.py)
 
 
-
-> How would you work on improving the performance of the queries? Would you use primary
+---
+> 3. How would you work on improving the performance of the queries? Would you use primary
 keys, indexes?
 
 Yes. the transaction_id for the Transactions is the primary key. 
@@ -34,8 +35,8 @@ And the unique_id for the Property is the primary key.
 Indexes can be used for the postcode, date_of_transfer, price columns.
 But I am not sure if it will be useful, it depends on the usage, which I am not aware of. 
 
-
-> Can you write a query that returns the transactions that took place in EC1A between 2018-
+---
+> 4. Can you write a query that returns the transactions that took place in EC1A between 2018-
 04-01 and 2019-12-31?
 
 Considering my table structure, the query would look like this. 
@@ -47,7 +48,8 @@ SELECT transaction_id, date_of_transfer, postcode FROM transactions WHERE transa
 I also took advice of using only 2019-2020 data, so my results most likely include less rows than expected. 
 ![IMAGE OF QUERY](https://media.discordapp.net/attachments/1097141968682893484/1227726008170315786/image.png?ex=662973f2&is=6616fef2&hm=fc256c603f58cb9154c6db293c97e621fe7b91fa79d35853bb013245d07eb6ef&=&format=webp&quality=lossless&width=1123&height=655)
 
-> Utilizing the class structure in python you have defined, create methods to
+---
+>  5. Utilizing the class structure in python you have defined, create methods to
 \- return the number of properties that have been sold in a postcode, and which
 transaction_ids refer to those. Test with ST10 4BS. Were there 2 transaction in
 2019?
@@ -79,8 +81,8 @@ pytest tests/test_presence.py -k test_return_property_by_transaction
 
 
 
-
-> Which postcodes have seen the highest increase in transactions during the last 5 years? No
+---
+> 6. Which postcodes have seen the highest increase in transactions during the last 5 years? No
 need to do the analysis at the full postcode level; the first part is sufficient. Thus instead of
 e.g. SE13 5HA, consider only SE13.
 
@@ -117,7 +119,8 @@ The top 5 postcodes with the highest increase in transactions are:
 pytest tests/test_count.py -k test_get_transactions_count_by_postcode_and_year
 ```
 
-> Can you come up with an indication of a ‘migration’ metric in the UK? Perhaps it would be
+---
+> 7. Can you come up with an indication of a ‘migration’ metric in the UK? Perhaps it would be
 best if you combined the postcode coordinates dataset for this exercise (url #6). Where is the
 ‘centre of gravity’ in terms of number of transactions of the population moving to every year?
 Where is the ‘centre of gravity’ in terms of value moving to? For now, consider that the ‘centre
@@ -140,8 +143,8 @@ The code should be run good for larger datasets, not only 2019, 2020.
 
 
 
-
-> Assume that EC1A is the centre of London. Can you plot the average transaction price of a
+---
+> 8. Assume that EC1A is the centre of London. Can you plot the average transaction price of a
 postcode as a function of distance from EC1A? There are numerous postcodes within EC1A,
 so try to use the centre of all of the postcodes within it. The distance between two points a,
 and b, with coordinates (x1, y1) and (x0, y0) is 𝑑 = ඥ(𝑥ଵ − 𝑥଴
@@ -169,7 +172,8 @@ Exponential function was also tried, but it was not that good on the long distan
 
 Tried using higher polynomials, but still wasn't satisfied. :\ 
 
-> Can you find any correlation between the average house prices (url #4), and a CPI indicator
+---
+> 9. Can you find any correlation between the average house prices (url #4), and a CPI indicator
 (url #5)? Do not be concerned about the lag in the CPI and the house prices not being
 synchronized. Assume that all data points are normalized (an average price in Aug 2014 can
 be matched to an Aug 2014 entry in the CPI dataset). Also, just use United Kingdom as a region
