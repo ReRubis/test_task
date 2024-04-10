@@ -38,14 +38,14 @@ But I am not sure if it will be useful, it depends on the usage, which I am not 
 > Can you write a query that returns the transactions that took place in EC1A between 2018-
 04-01 and 2019-12-31?
 
-Considering my table structure, the query would require a join. 
+Considering my table structure, the query would look like this. 
 
 ```sql
-SELECT transaction_id, date_of_transfer, postcode, unique_id FROM transactions JOIN propertys ON transactions.property_id = propertys.unique_id WHERE propertys.postcode LIKE '%EC1A%' AND transactions.date_of_transfer BETWEEN '2018-04-01' AND '2019-12-31';
+SELECT transaction_id, date_of_transfer, postcode FROM transactions WHERE transactions.postcode LIKE '%EC1A%' AND transactions.date_of_transfer BETWEEN '2018-04-01' AND '2019-12-31';
 ```
 
 I also took advice of using only 2019-2020 data, so my results most likely include less rows than expected. 
-![IMAGE OF QUERY](https://media.discordapp.net/attachments/1097141968682893484/1226990799611498526/image.png?ex=6626c73b&is=6614523b&hm=e975ef47bbbb6e4240be13744c95dce3a826c799fe950730a120b0b48d725391&=&format=webp&quality=lossless&width=689&height=655)
+![IMAGE OF QUERY](https://media.discordapp.net/attachments/1097141968682893484/1227726008170315786/image.png?ex=662973f2&is=6616fef2&hm=fc256c603f58cb9154c6db293c97e621fe7b91fa79d35853bb013245d07eb6ef&=&format=webp&quality=lossless&width=1123&height=655)
 
 > Utilizing the class structure in python you have defined, create methods to
 \- return the number of properties that have been sold in a postcode, and which
