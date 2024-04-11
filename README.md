@@ -27,3 +27,6 @@ Inside container:
 1> CREATE DATABASE property_db;
 2> GO
 ```
+4. Populate the databse by running the analyze.ipynb notebook.
+It might take up to 30 minutes.  I wasn't concerned much, since I only had to do it once.
+
