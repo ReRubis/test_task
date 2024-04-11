@@ -6,7 +6,7 @@ The recommended way of installation is through the dev-containvers VS Code exten
 2. Create the data folder and add the .csv data files. 
 3. Open up the docker database container. 
 
-(This step might be automated, but I am was limited on time.)
+(This step might be automated, but I was limited on time.)
 
 Find the container ID by running the following command:
 ```sh
